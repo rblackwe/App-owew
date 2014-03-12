@@ -26,6 +26,7 @@ my $mcpan = MetaCPAN::API->new(
     mechua => WWW::Mechanize::Cached->new(
       cache => CHI->new(
         driver => 'File',
+	expires_in => '10 min',
         root_dir => '/tmp/metacpan-cache',
       ),
     ),
@@ -59,7 +60,7 @@ R: for my $release (@{ $releases->{hits}{hits} }) {
 	$date =~ s/T.*$//;
 	my $dt = $parser->parse_datetime($date);
 	my $days = int($now->subtract_datetime_absolute($dt)->delta_seconds / (24*60*60));
-	warn "$name released $days ago";
+	warn "$name released $days days ago";
 	if($days <= 7 ) {
 		pass "Days $days - $date";
 		$contest_ok = 1;
