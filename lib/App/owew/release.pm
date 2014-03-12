@@ -19,7 +19,7 @@ sub run {
 my $class       = shift;
 my $cpan_author = uc shift;
 
-BAIL_OUT("CPAN author required! Ex: %>prove release.t :: rblackwe") unless $cpan_author;
+BAIL_OUT("CPAN author required! Ex: %>prove release.t :: $cpan_author") unless $cpan_author;
 
 my $mcpan = MetaCPAN::API->new(
   ua => HTTP::Tiny::Mech->new(
@@ -65,7 +65,7 @@ R: for my $release (@{ $releases->{hits}{hits} }) {
 		$contest_ok = 1;
 		last R;
 	} else {
-		warn "Days $days - $date";
+		note "Days $days - $date";
 	}
 }
 
