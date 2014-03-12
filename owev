@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Data::Dumper;
+use Module::Info;
+use TAP::Harness;
+use App::owew::release;
+my $mod = Module::Info->new_from_module('App::owew::release');
+my $harness = TAP::Harness->new();
+$harness->test_args([@ARGV]);
+$harness->runtests($mod->file);
+
